@@ -1,4 +1,4 @@
-#Abstract Mail Processor
+#Confluence Abstract Mail Processor Plugin
 
 Abstract Confluence plugin to use as a base for developing a plugin that needs to process mails from a mail account.
 
