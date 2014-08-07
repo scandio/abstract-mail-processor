@@ -3,24 +3,24 @@
         <description>${project.description}</description>
         <version>${project.version}</version>
         <vendor name="${project.organization.name}" url="${project.organization.url}" />
-		<param name="configure.url">/admin/plugins/mail2news/editmailconfiguration.action</param>
+		<param name="configure.url">/admin/plugins/abstractmailprocessor/editmailconfiguration.action</param>
     </plugin-info>
 
-	<job key="mail2news-plugin" name="Mail to News Job" class="com.midori.confluence.plugin.mail2news.Mail2NewsJob">
+	<job key="abstractMailProcessorJob" name="Abstract Mail Processor Job" class="com.midori.confluence.plugin.mail2news.Mail2NewsJob">
 		<description>Retrieves mail from a specified account and adds them as news to a space.</description>
     </job>
 
-    <trigger key="mail2newsTrigger" name="Mail to News Trigger">       
-        <job key="mail2news-plugin" />       
+    <trigger key="abstractMailProcessorTrigger" name="Abstract Mail Processor Trigger">
+        <job key="abstractMailProcessorJob" />
         <description>Executes the job every 5 minutes.</description>
         <schedule cron-expression="0 0/5 * * * ?" />
 		<managed editable="true" keepingHistory="true" canRunAdhoc="true" canDisable="true"/>
     </trigger>
     
     <xwork name="Configure Mail Action" key="mailconfigurationactions">
-        <description>Actions for editing the mail configuration for the Mail to News Plugin.</description>
+        <description>Actions for editing the mail configuration for the Abstract Mail Processor Plugin.</description>
 
-         <package name="mail2news" extends="default" namespace="/admin/plugins/mail2news">
+         <package name="abstractMailProcessor" extends="default" namespace="/admin/plugins/abstractmailprocessor">
             <default-interceptor-ref name="defaultStack" />
 
             <action name="editmailconfiguration" class="com.midori.confluence.plugin.mail2news.actions.ConfigurationAction" method="doDefault">
