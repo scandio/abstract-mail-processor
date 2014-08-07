@@ -38,20 +38,37 @@
 
 package com.midori.confluence.plugin.mail2news;
 
-import org.apache.log4j.Logger;
-
 import com.atlassian.bandana.BandanaContext;
 import com.atlassian.bandana.BandanaManager;
 import com.atlassian.confluence.setup.bandana.ConfluenceBandanaContext;
+import com.atlassian.core.exception.InfrastructureException;
 import com.atlassian.spring.container.ContainerManager;
 import com.thoughtworks.xstream.XStream;
+import org.apache.log4j.Logger;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
 
 public class ConfigurationManager {
 
     /**
      * The bandana key for the configuration of this plugin.
      */
-    private static final String BANDANA_KEY = "com.midori.confluence.plugin.mail2news.mail2news.ConfigurationManager";
+    private static final String BANDANA_KEY;
+
+    static {
+        Properties config = new Properties();
+        InputStream inputStream = ConfigurationManager.class.getClassLoader()
+                .getResourceAsStream("config.properties");
+        try {
+            config.load(inputStream);
+            BANDANA_KEY = config.getProperty("bandana.key");
+
+        } catch (IOException e) {
+            throw new InfrastructureException("error loading properties", e);
+        }
+    }
 
     /**
      * The bandana context to access the configuration of this plugin.
