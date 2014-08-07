@@ -1,5 +1,12 @@
-#Abstract Mail Processor Plugin
+#Abstract Mail Processor
 
-Abstract plugin to use as a base for developing a plugin that needs to process mails from a mail account.
+Abstract Confluence plugin to use as a base for developing a plugin that needs to process mails from a mail account.
 
 This is a fork of the [Mail to News](https://marketplace.atlassian.com/plugins/com.midori.confluence.plugin.mail2news) plugin.
+
+## How to use
+
+1. Fork this repository
+2. Change groupId, artifactId, name and description
+3. Implement a processor extending the class AbstractMailProcessorJob
+4. Swap your class with with the Mail2NewsJob class in the job module in the atlassian-plugin.xml
