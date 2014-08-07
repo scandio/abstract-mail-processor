@@ -1,4 +1,4 @@
-Copyright (c) 2008, Liip AG
+Copyright (c) 2014, Scandio GmbH
 
 All rights reserved.
 
