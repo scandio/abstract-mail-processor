@@ -3,24 +3,24 @@
         <description>${project.description}</description>
         <version>${project.version}</version>
         <vendor name="${project.organization.name}" url="${project.organization.url}" />
-		<param name="configure.url">/admin/plugins/abstractmailprocessor/editmailconfiguration.action</param>
+		<param name="configure.url">/admin/plugins/${project.artifactId}/editmailconfiguration.action</param>
     </plugin-info>
 
-	<job key="abstractMailProcessorJob" name="Abstract Mail Processor Job" class="com.midori.confluence.plugin.mail2news.Mail2NewsJob">
+	<job key="${project.artifactId}-job" name="${project.name} Job" class="com.midori.confluence.plugin.mail2news.Mail2NewsJob">
 		<description>Retrieves mail from a specified account and adds them as news to a space.</description>
     </job>
 
-    <trigger key="abstractMailProcessorTrigger" name="Abstract Mail Processor Trigger">
-        <job key="abstractMailProcessorJob" />
+    <trigger key="${project.artifactId}-trigger" name="${project.name} Trigger">
+        <job key="${project.artifactId}-job" />
         <description>Executes the job every 5 minutes.</description>
         <schedule cron-expression="0 0/5 * * * ?" />
 		<managed editable="true" keepingHistory="true" canRunAdhoc="true" canDisable="true"/>
     </trigger>
     
     <xwork name="Configure Mail Action" key="mailconfigurationactions">
-        <description>Actions for editing the mail configuration for the Abstract Mail Processor Plugin.</description>
+        <description>Actions for editing the mail configuration for the ${project.name} Plugin.</description>
 
-         <package name="abstractMailProcessor" extends="default" namespace="/admin/plugins/abstractmailprocessor">
+         <package name="${project.artifactId}" extends="default" namespace="/admin/plugins/${project.artifactId}">
             <default-interceptor-ref name="defaultStack" />
 
             <action name="editmailconfiguration" class="com.midori.confluence.plugin.mail2news.actions.ConfigurationAction" method="doDefault">
