@@ -2,17 +2,19 @@
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.midori.confluence.plugin</groupId>
-    <artifactId>mail2news</artifactId>
-    <version>1.11.0</version>
+    <groupId>de.scandio.confluence.plugins</groupId>
+    <artifactId>abstract-mail-processor</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
     <organization>
-        <name>Stimmt AG - Midori</name>
-        <url>http://www.stimmt.ch</url>
+        <name>Scandio GmbH</name>
+        <url>http://www.scandio.de</url>
     </organization>
-    <name>Mail to News Plugin</name>
+
+    <name>Abstract Mail Processor</name>
     <packaging>atlassian-plugin</packaging>
-    <description>Retrieves mails from an email account, and adds them as news to the wiki space indicated in the email address (e.g. wiki+spacekey@domain.net).</description>
-    <url>https://plugins.atlassian.com/13214</url>
+    <description>Abstract plugin to use as a base for developing a plugin that needs to process mails from a mail account. This is a fork of the Mail to News plugin.</description>
+
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -33,6 +35,7 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
     <build>
         <plugins>
             <plugin>
@@ -81,6 +84,7 @@
             </resource>
         </resources>
     </build>
+
     <distributionManagement>
         <repository>
             <id>atlassian-contrib</id>
@@ -93,6 +97,7 @@
             <url>dav:https://maven.atlassian.com/contrib-snapshot</url>
         </snapshotRepository>
     </distributionManagement>
+
     <properties>
         <confluence.version>5.4.3</confluence.version>
         <confluence.data.version>5.4.3</confluence.data.version>
