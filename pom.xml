@@ -99,8 +99,8 @@
         </snapshotRepository>
     </distributionManagement>
     <properties>
-        <confluence.version>5.4.1</confluence.version>
-        <confluence.data.version>5.4.1</confluence.data.version>
+        <confluence.version>5.4.3</confluence.version>
+        <confluence.data.version>5.4.3</confluence.data.version>
         <amps.version>5.0.3</amps.version>
         <upm.license.compatibility.version>2.4.1</upm.license.compatibility.version>
         <sal.api.version>2.4.0</sal.api.version>
