@@ -713,7 +713,7 @@ public abstract class AbstractMailProcessorJob extends AbstractJob {
                     throw e;
                 }
 				/* create a new attachment */
-                Attachment a = new Attachment(fileName, contentType, attachment.length, "Attachment added by mail2news");
+                Attachment a = new Attachment(fileName, contentType, attachment.length, null);
                 Date d = new Date();
                 a.setCreationDate(d);
                 a.setLastModificationDate(d);
