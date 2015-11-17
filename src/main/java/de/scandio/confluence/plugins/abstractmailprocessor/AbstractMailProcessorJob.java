@@ -9,6 +9,8 @@ import com.atlassian.confluence.user.UserAccessor;
 import com.atlassian.mail.MailFactory;
 import com.atlassian.mail.server.SMTPMailServer;
 import com.atlassian.quartz.jobs.AbstractJob;
+import com.atlassian.sal.api.transaction.TransactionCallback;
+import com.atlassian.sal.api.transaction.TransactionTemplate;
 import com.atlassian.spring.container.ContainerManager;
 import com.midori.confluence.plugin.mail2news.ConfigurationManager;
 import com.midori.confluence.plugin.mail2news.MailConfiguration;
@@ -62,6 +64,8 @@ public abstract class AbstractMailProcessorJob extends AbstractJob {
      */
     protected ConfigurationManager configurationManager;
 
+    protected TransactionTemplate transactionTemplate;
+
     /**
      * The content of a message, this will be the content of the
      * news entry
@@ -102,8 +106,16 @@ public abstract class AbstractMailProcessorJob extends AbstractJob {
      *
      * @see com.atlassian.quartz.jobs.AbstractJob#doExecute(org.quartz.JobExecutionContext)
      */
-    public void doExecute(JobExecutionContext arg0)
-            throws JobExecutionException {
+    public void doExecute(JobExecutionContext arg0) throws JobExecutionException {
+        transactionTemplate.execute(new TransactionCallback<Object>() {
+            public Object doInTransaction() {
+                processMail();
+                return null;
+            }
+        });
+    }
+
+    protected void processMail() {
 
 		/* The mailstore object used to connect to the server */
         Store store = null;
@@ -485,8 +497,7 @@ public abstract class AbstractMailProcessorJob extends AbstractJob {
         {
 			/* catch any exception which was not handled so far */
             this.log.error("Error while executing mail2news job: " + e.getMessage(), e);
-            JobExecutionException jee = new JobExecutionException("Error while executing mail2news job: " + e.getMessage(), e, false);
-            throw jee;
+            throw new RuntimeException("Error while executing mail2news job: " + e.getMessage(), e);
         }
         finally
         {
@@ -972,5 +983,10 @@ public abstract class AbstractMailProcessorJob extends AbstractJob {
     public void setUserAccessor(UserAccessor userAccessor)
     {
         this.userAccessor = userAccessor;
+    }
+
+    public void setTransactionTemplate(TransactionTemplate transactionTemplate)
+    {
+        this.transactionTemplate = transactionTemplate;
     }
 }

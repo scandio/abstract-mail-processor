@@ -6,6 +6,11 @@
 		<param name="configure.url">/admin/plugins/${project.artifactId}/editmailconfiguration.action</param>
     </plugin-info>
 
+    <component-import key="transactionTemplate">
+        <description>Import the com.atlassian.sal.api.transaction.TransactionTemplate</description>
+        <interface>com.atlassian.sal.api.transaction.TransactionTemplate</interface>
+    </component-import>
+
 	<job key="${project.artifactId}-job" name="${project.name} Job" class="com.midori.confluence.plugin.mail2news.Mail2NewsJob">
 		<description>Retrieves mail from a specified account and adds them as news to a space.</description>
     </job>
